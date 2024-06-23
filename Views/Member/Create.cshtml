@@ -1,0 +1,137 @@
+﻿@model Gym.Models.MemberViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+
+<style scoped>
+    body {
+        background-color: #f4f7fa;
+        font-family: Arial, sans-serif;
+    }
+
+    h1 {
+        color: #343a40;
+        margin-bottom: 30px;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        background-color: #007bff;
+        color: white;
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .card-body {
+        padding: 30px;
+    }
+
+    .form-group label {
+        color: #495057;
+        font-weight: bold;
+    }
+
+    .form-control {
+        border-radius: 5px;
+        border: 1px solid #ced4da;
+        height: calc(1.5em + .75rem + 2px);
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+        width: 100%;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    .text-center a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+        .text-center a:hover {
+            text-decoration: underline;
+        }
+
+    .text-danger {
+        color: #dc3545;
+    }
+</style>
+
+<h1 class="text-center mb-5">Create Member</h1>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    Create Member
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <div class="form-group">
+                            <label asp-for="FirstName" class="control-label">First Name</label>
+                            <input asp-for="FirstName" class="form-control" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="LastName" class="control-label">Last Name</label>
+                            <input asp-for="LastName" class="form-control" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Birthdate" class="control-label">Birthdate</label>
+                            <input asp-for="Birthdate" class="form-control" type="date" />
+                            <span asp-validation-for="Birthdate" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="IdCardNumber" class="control-label">ID Card Number</label>
+                            <input asp-for="IdCardNumber" class="form-control" />
+                            <span asp-validation-for="IdCardNumber" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Email" class="control-label">Email</label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </div>
+                    </form>
+                    <div class="text-center mt-3">
+                        <a asp-action="Index" class="btn btn-link">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p class="text-center mt-3 text-danger">@ViewBag.ErrorMessage</p>

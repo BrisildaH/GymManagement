@@ -1,28 +1,19 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Gym.Data.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace Gym.Data.Entities
+namespace Gym.Models
 {
-    public class MemberSubscription
+    public class MemberSubscriptionModel
     {
 
-        [Key]
         public int ID { get; set; }
-
-        #region Member Relationship
-        [ForeignKey("Member")]
         public int MemberID { get; set; }
-        public Member Member { get; set; }
-        #endregion
-
-        #region Subscriber Relationship
-        [ForeignKey("Subscription")]
         public int SubscriptionID { get; set; }
-        public Subscription Subscription { get; set; }
-        #endregion
-
+        public string MemberCardId { get; set; }
+        public string FirstName { get; set; }
+        public string SubscriptionCode { get; set; }
         public decimal OriginalPrice { get; set; }
         public decimal DiscountValue { get; set; }
         public decimal PaidPrice { get; set; }
@@ -32,4 +23,5 @@ namespace Gym.Data.Entities
         public bool IsDeleted { get; set; }
     }
 }
+
 

@@ -1,0 +1,118 @@
+﻿@using Gym.Helpers
+@model Gym.Models.MemberViewModel
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+
+<style>
+    body {
+        background-color: #f4f7fa;
+        font-family: Arial, sans-serif;
+    }
+
+    .card {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    }
+
+    .card-header {
+        background-color: #007bff;
+        color: white;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        padding: 15px;
+        text-align: center;
+    }
+
+        .card-header h3 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+    .card-body h4 {
+        margin-top: 20px;
+        margin-bottom: 5px;
+        color: #007bff;
+        font-weight: bold;
+    }
+
+    .card-body p {
+        margin-top: 0;
+        font-size: 16px;
+    }
+
+    .btn-primary, .btn-danger {
+        margin-top: 20px;
+        margin-right: 5px;
+        font-size: 16px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+            transform: scale(1.05);
+        }
+
+        .btn-primary:focus, .btn-danger:focus {
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+    a.btn-link {
+        color: #007bff;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+        a.btn-link:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+    .text-danger {
+        color: #dc3545;
+    }
+</style>
+
+<div class="card">
+    <div class="card-header">
+        <h3>Member: @Model.FirstName @Model.LastName</h3>
+    </div>
+
+    <div class="card-body">
+        <h4>Birthdate:</h4>
+        <p>@Model.Birthdate.ToString("dd-MM-yyyy")</p>
+        <h4>Email:</h4>
+        <p>@Model.Email</p>
+        <h4>ID Number:</h4>
+        <p>@Model.IdCardNumber</p>
+        <h4>Registration Date:</h4>
+        <p>@Model.RegistrationDate</p>
+        <h4>Update Date:</h4>
+        <p>@Model.UpdateDate</p>
+
+        <a asp-action="Update" asp-route-id="@Model.ID" class="btn btn-primary">Update</a>
+
+        <form asp-action="Delete" asp-route-idCardNumber="@Model.IdCardNumber" method="post" style="display: inline;">
+            <input type="hidden" asp-for="ID" value="@Model.ID" />
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+    </div>
+
+    <div class="text-center mt-3">
+        <a asp-action="Index" class="btn btn-link">Back to List</a>
+    </div>
+</div>
+
+<p class="text-center mt-3 text-danger">@ViewBag.ErrorMessage</p>

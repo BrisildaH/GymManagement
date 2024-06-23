@@ -1,0 +1,158 @@
+﻿@model Gym.Models.MemberSubscriptionCreateViewModel
+@{
+    ViewData["Title"] = "Activate Subscription";
+}
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: Arial, sans-serif;
+    }
+
+    h1 {
+        color: #343a40;
+        margin-bottom: 20px;
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .details-container {
+        background-color: #ffffff;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+        .details-container h4 {
+            color: #007bff;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+    .form-group label {
+        color: #495057;
+        font-weight: bold;
+    }
+
+    .form-control {
+        border-radius: 5px;
+        border: 1px solid #ced4da;
+        margin-bottom: 10px;
+        height: calc(1.5em + .75rem + 2px);
+        font-size: 14px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+    .text-danger {
+        color: #dc3545;
+    }
+
+    .row {
+        margin: 0;
+    }
+
+    dt, dd {
+        margin-bottom: 8px;
+    }
+
+    dt {
+        font-weight: bold;
+    }
+</style>
+
+<div class="container mt-4">
+    <h1>Activate Subscription</h1>
+
+    <form asp-action="ActivateSubscription" method="post">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="details-container">
+                    <h4>Subscription Details</h4>
+                    <hr />
+                    <dl class="row">
+                        <dd class="col-sm-12">
+                            <input asp-for="SubscriptionViewModel.ID" class="form-control" hidden />
+                        </dd>
+                        <dt class="col-sm-4">
+                            Code:
+                        </dt>
+                        <dd class="col-sm-8">
+                            <input asp-for="SubscriptionViewModel.Code" class="form-control" readonly />
+                        </dd>
+                        <dt class="col-sm-4">
+                            Description:
+                        </dt>
+                        <dd class="col-sm-8">
+                            <input asp-for="SubscriptionViewModel.Description" class="form-control" readonly />
+                        </dd>
+                        <dt class="col-sm-4">
+                            Number of Months:
+                        </dt>
+                        <dd class="col-sm-8">
+                            <input asp-for="SubscriptionViewModel.NumberOfMonths" class="form-control" readonly />
+                        </dd>
+                        <dt class="col-sm-4">
+                            Week Frequency:
+                        </dt>
+                        <dd class="col-sm-8">
+                            <input asp-for="SubscriptionViewModel.WeekFrequency" class="form-control" readonly />
+                        </dd>
+                        <dt class="col-sm-4">
+                            Total Number of Sessions:
+                        </dt>
+                        <dd class="col-sm-8">
+                            <input asp-for="SubscriptionViewModel.TotalNumberOfSessions" class="form-control" readonly />
+                        </dd>
+                        <dt class="col-sm-4">
+                            Total Price:
+                        </dt>
+                        <dd class="col-sm-8">
+                            <input asp-for="SubscriptionViewModel.TotalPrice" class="form-control" readonly />
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="details-container">
+                    <h4>Activation Details</h4>
+                    <hr />
+                    <div class="form-group">
+                        <label asp-for="MemberId" class="control-label">Select Member:</label>
+                        <select asp-for="MemberId" asp-items="@ViewBag.MemberList" class="form-control">
+                            <option>Please select a member</option>
+                        </select>
+                        <span asp-validation-for="MemberId" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="StartDate" class="control-label">Start Date:</label>
+                        <input asp-for="StartDate" class="form-control" />
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group text-center">
+            <button type="submit" class="btn btn-primary">Activate</button>
+        </div>
+    </form>
+</div>

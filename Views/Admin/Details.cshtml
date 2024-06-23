@@ -1,0 +1,18 @@
+﻿@using Gym.Helpers
+@model Gym.Models.UserViewModel
+
+<h1>User Details</h1>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">ID:</dt>
+        <dd class="col-sm-10">@Model.ID</dd>
+
+        <dt class="col-sm-2">Email:</dt>
+        <dd class="col-sm-10">@Model.Email</dd>
+
+        <dt class="col-sm-2">Role:</dt>
+        <dd class="col-sm-10">@Model.Role</dd> 
+</div>
+
+<a asp-controller="Admin" asp-action="Index">Back to List</a>

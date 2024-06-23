@@ -1,0 +1,93 @@
+﻿@model Gym.Models.SubscriptionViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        padding-top: 20px;
+    }
+
+    h1 {
+        font-family: 'Arial', sans-serif;
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #007bff; 
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: bold;
+        color: #007bff; 
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3; 
+            border-color: #0056b3;
+        }
+
+    .text-danger {
+        color: #dc3545; 
+    }
+</style>
+
+<div class="container">
+    <h1 class="text-center mb-4">Edit Subscription</h1>
+
+    <div class="row">
+        <div class="col-md-8">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="ID" />
+                <div class="form-group">
+                    <label asp-for="Code" class="control-label"></label>
+                    <input asp-for="Code" class="form-control" />
+                    <span asp-validation-for="Code" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="WeekFrequency" class="control-label"></label>
+                    <select asp-for="WeekFrequency" class="form-control">
+                        <option value="3">3 days</option>
+                        <option value="4">4 days</option>
+                        <option value="Everyday">Every day</option>
+                    </select>
+                    <span asp-validation-for="WeekFrequency" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NumberOfMonths" class="control-label"></label>
+                    <input asp-for="NumberOfMonths" class="form-control" />
+                    <span asp-validation-for="NumberOfMonths" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TotalPrice" class="control-label"></label>
+                    <input asp-for="TotalPrice" class="form-control" />
+                    <span asp-validation-for="TotalPrice" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <div class="d-flex justify-content-between">
+                        <input type="submit" value="Save" class="btn btn-primary mr-2" />
+                        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

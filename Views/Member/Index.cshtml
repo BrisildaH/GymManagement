@@ -1,0 +1,136 @@
+﻿@using Gym.Helpers
+@model IEnumerable<Gym.Models.MemberViewModel>
+
+@{
+    ViewData["Title"] = "Members";
+}
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container">
+    <h1 class="mt-4 mb-4 text-center text-primary">Members</h1>
+
+    @if (!string.IsNullOrWhiteSpace(TempData["ErrorMessage"] as string))
+    {
+        <div class="alert alert-danger" role="alert">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    <div class="mb-3">
+        <a asp-action="Create" class="btn btn-success btn-sm">Create New Member</a>
+    </div>
+
+    <form asp-controller="Member" asp-action="Index" method="get" class="mb-3 small">
+        <div class="input-group">
+            <input type="text" class="form-control" name="filterTerm" placeholder="Search" value="@ViewBag.FilterTerm" />
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary btn-sm">Search</button>
+            </div>
+        </div>
+    </form>
+
+    <table class="table table-hover table-striped">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Birthdate</th>
+                <th scope="col">ID Card Number</th>
+                <th scope="col">Email</th>
+                <th scope="col">Registration Date</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var member in Model)
+            {
+                <tr>
+                    <td>@member.FirstName</td>
+                    <td>@member.LastName</td>
+                    <td>@member.Birthdate</td>
+                    <td>@member.IdCardNumber</td>
+                    <td>@member.Email</td>
+                    <td>@member.RegistrationDate</td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Member Actions">
+                            <a asp-action="Details" asp-route-id="@member.ID" class="btn btn-info btn-sm">Details</a>
+                            <a asp-action="Update" asp-route-id="@member.ID" class="btn btn-primary btn-sm">Edit</a>
+                            <form asp-action="Delete" asp-route-id="@member.ID" method="post" onsubmit="return confirm('Are you sure you want to delete this member?');" class="d-inline">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <p class="text-center text-muted mt-3 mb-0"></p>
+</div>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    h1 {
+        font-family: 'Arial', sans-serif;
+        font-size: 2.0rem;
+        font-weight: bold;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: deepskyblue;
+    }
+
+    .btn {
+        transition: transform 0.2s;
+    }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+    .btn-success {
+        background-color: #28a745;
+        border: none;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+    }
+
+    .btn-info {
+        background-color: #17a2b8;
+        border: none;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        border: none;
+    }
+
+        .btn-success:hover,
+        .btn-primary:hover,
+        .btn-info:hover,
+        .btn-danger:hover {
+            filter: brightness(90%);
+        }
+
+    .small {
+        font-size: 0.875rem;
+    }
+
+    .thead {
+        background-color: #f0f0f0;
+        color: #333;
+    }
+
+    .input-group-sm .form-control,
+    .input-group-sm .input-group-append .btn {
+        height: calc(1.5em + .75rem + 2px);
+        font-size: .875rem;
+    }
+</style>

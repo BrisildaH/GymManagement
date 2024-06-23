@@ -1,0 +1,54 @@
+﻿@* @model Gym.Models.MemberSubscriptionModel
+
+@{
+    ViewData["Title"] = "Activate Subscription";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="ActivateSubscription" method="post">
+    <div class="form-group">
+        <label asp-for="MemberCardId" class="control-label"></label>
+        <select asp-for="MemberCardId" class="form-control" asp-items="@ViewBag.MemberList"></select>
+        <span asp-validation-for="MemberCardId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SubscriptionCode" class="control-label"></label>
+        <select asp-for="SubscriptionCode" class="form-control" asp-items="@ViewBag.SubscriptionList"></select>
+        <span asp-validation-for="SubscriptionCode" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="OriginalPrice" class="control-label"></label>
+        <input asp-for="OriginalPrice" class="form-control" readonly />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DiscountValue" class="control-label"></label>
+        <input asp-for="DiscountValue" class="form-control" readonly />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PaidPrice" class="control-label"></label>
+        <input asp-for="PaidPrice" class="form-control" readonly />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="StartDate" class="control-label"></label>
+        <input asp-for="EndDate" class="form-control"  />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="EndDate" class="control-label"></label>
+        <input asp-for="EndDate" class="form-control" readonly />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="RemainingSessions" class="control-label"></label>
+        <input asp-for="RemainingSessions" class="form-control" readonly />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Activate</button>
+</form>
+ *@

@@ -1,0 +1,115 @@
+﻿@model IEnumerable<Gym.Models.MemberSubscriptionModel>
+
+@{
+    ViewData["Title"] = "Member Subscriptions";
+}
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container">
+    <h1 class="mt-4 mb-4 text-center text-primary">Member Subscriptions</h1>
+
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <form asp-controller="MemberSubscription" asp-action="Index" method="get">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="keyword" placeholder="Search" value="@ViewBag.FilterTerm" />
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    <table class="table table-striped table-hover">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Member Card ID</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Subscription Code</th>
+                <th scope="col">Original Price</th>
+                <th scope="col">Discount Value</th>
+                <th scope="col">Paid Price</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Remaining Sessions</th>
+                <th scope="col">Check In</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var subscription in Model)
+            {
+                <tr>
+                    <td>@subscription.MemberCardId</td>
+                    <td>@subscription.FirstName</td>
+                    <td>@subscription.SubscriptionCode</td>
+                    <td>@subscription.OriginalPrice</td>
+                    <td>@subscription.DiscountValue</td>
+                    <td>@subscription.PaidPrice</td>
+                    <td>@subscription.StartDate.ToShortDateString()</td>
+                    <td>@subscription.EndDate.ToShortDateString()</td>
+                    <td>@subscription.RemainingSessions</td>
+                    <td>
+                        <form asp-action="Check" asp-route-id="@subscription.ID" method="post" onsubmit="return confirm('Are you sure you want to check in this subscription?')">
+                            <button type="submit" class="btn btn-success">Check In</button>
+                        </form>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    h1 {
+        font-family: 'Arial', sans-serif;
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #007bff;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: dodgerblue;
+    }
+
+    .btn {
+        transition: transform 0.2s;
+    }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+    .btn-info {
+        background-color: #17a2b8;
+        border: none;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        border: none;
+    }
+
+        .btn-info:hover,
+        .btn-success:hover {
+            filter: brightness(90%);
+        }
+
+    .thead-light {
+        background-color: #87cefa;
+        color: #000000;
+    }
+</style>

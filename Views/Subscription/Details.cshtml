@@ -1,0 +1,79 @@
+﻿@model Gym.Models.SubscriptionViewModel
+
+@{
+    ViewData["Title"] = "Subscription Details";
+}
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        padding-top: 20px;
+    }
+
+    h1 {
+        font-family: 'Arial', sans-serif;
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #007bff; 
+    }
+
+    .dl-horizontal dt {
+        white-space: normal; 
+        text-align: left;
+        width: auto;
+        padding-right: 10px;
+        font-weight: bold;
+        color: #007bff; 
+    }
+
+    .dl-horizontal dd {
+        margin-left: 0;
+        font-weight: normal;
+        color: #495057; 
+    }
+
+    .action-links a {
+        margin-right: 10px;
+        color: #007bff; 
+    }
+
+        .action-links a:hover {
+            color: #0056b3; 
+        }
+</style>
+
+<div class="container">
+    <h1 class="text-center mb-4">Subscription Details</h1>
+
+    <div>
+        <h4>Subscription</h4>
+        <hr />
+        <dl class="row dl-horizontal">
+            <dt class="col-sm-2">Code:</dt>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.Code)</dd>
+
+            <dt class="col-sm-2">Description:</dt>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.Description)</dd>
+
+            <dt class="col-sm-2">Number of Months:</dt>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.NumberOfMonths)</dd>
+
+            <dt class="col-sm-2">Week Frequency:</dt>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.WeekFrequency)</dd>
+
+            <dt class="col-sm-2">Total sessions:</dt>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.TotalNumberOfSessions)</dd>
+
+            <dt class="col-sm-2">Total Price:</dt>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.TotalPrice)</dd>
+        </dl>
+    </div>
+
+    <div class="action-links">
+        <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>
