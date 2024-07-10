@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 using Gym.Models;
 using System;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Gym.Service;
 
 public class AdminController : Controller
 {
@@ -16,6 +19,7 @@ public class AdminController : Controller
         _roleManager = roleManager;
     }
 
+    [Authorize]
     public async Task<IActionResult> Index(string filterTerm)
     {
         var usersQuery = _userManager.Users.AsQueryable();
@@ -45,6 +49,7 @@ public class AdminController : Controller
         return View(usersWithRoles);
     }
 
+    [Authorize]
     public async Task<IActionResult> Details(string id)
     {
         var user = await _userManager.FindByIdAsync(id);
@@ -66,12 +71,15 @@ public class AdminController : Controller
         return View(userViewModel);
     }
 
+    [Authorize]
     public IActionResult Create()
     {
+        ViewData["Roles"] = GetRolesSelectList();
         return View();
     }
 
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> Create(CreateUserViewModel model)
     {
         if (ModelState.IsValid)
@@ -97,6 +105,7 @@ public class AdminController : Controller
                     else
                     {
                         ModelState.AddModelError("", $"Role '{model.Role}' does not exist.");
+                        ViewBag.Roles = GetRolesSelectList();
                         return View(model);
                     }
                 }
@@ -111,10 +120,19 @@ public class AdminController : Controller
                 }
             }
         }
+
+        ViewBag.Roles = GetRolesSelectList();
         return View(model);
     }
 
+    private SelectList GetRolesSelectList()
+    {
+        var roles = _roleManager.Roles.Select(r => r.Name).ToList();
+        return new SelectList(roles);
+    }
+
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> Delete(string id)
     {
         var userToDelete = await _userManager.FindByIdAsync(id);
@@ -124,7 +142,7 @@ public class AdminController : Controller
             return NotFound();
         }
 
-        var currentUser = await _userManager.GetUserAsync(User); 
+        var currentUser = await _userManager.GetUserAsync(User);
 
         if (userToDelete.Email == currentUser.Email)
         {
@@ -144,8 +162,7 @@ public class AdminController : Controller
             {
                 ModelState.AddModelError("", error.Description);
             }
-            return RedirectToAction("Index"); 
+            return RedirectToAction("Index");
         }
     }
-
 }
